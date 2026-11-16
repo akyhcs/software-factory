@@ -360,3 +360,147 @@ Then compare actual products, their pricing, limitations and integration capabil
 If these four concepts are clear, the rest of this lesson becomes considerably easier.
 
 **Let's take the next step by understanding runners in more depth**, because choosing between CI runners, MicroVMs, bundled agent platforms and your own workers will influence the architecture of the entire Software Factory.
+
+
+---
+
+Yes. I missed an important part of the lesson: **the&#x20;**`/software-factory`**&#x20;skill and its supporting reference documents.** I focused too much on the five infrastructure components and didn't explain how skills fit into the decision-making process.
+
+Let's correct that.
+
+## **1. What is the&#x20;**`/software-factory`**&#x20;skill?**
+
+The lesson asks you to add a skill to your repository:
+
+```
+npm run cherry-pick add-software-factory-skill
+```
+
+Or, if your repository isn't at the expected starting commit:
+
+```
+npm run reset add-software-factory-skill
+```
+
+This adds:
+
+```
+.agents/
+  skills/
+    software-factory/
+      SKILL.md
+      references/
+        TICKET-TRACKERS.md
+        GIT-HOSTS.md
+        RUNNERS.md
+        OBSERVABILITY-PLATFORMS.md
+```
+
+The exact directory structure may vary, but these are the documents the lesson tells you to inspect.
+
+**What is the purpose of this skill?**
+
+It provides shared terminology and reference material to your coding agent.
+
+For example, when you tell your agent:
+
+> Help me choose a runner for my Software Factory.
+
+The agent should understand what a runner means in the context of this architecture, rather than interpreting it as just any background process.
+
+## **2. Understanding the reference documents**
+
+The lesson specifically asks you to read these files.
+
+| File                         | What you learn                                        |
+| ---------------------------- | ----------------------------------------------------- |
+| `SKILL.md`                   | Common terminology and concepts of a Software Factory |
+| `TICKET-TRACKERS.md`         | Available ticket tracking products                    |
+| `GIT-HOSTS.md`               | Available Git hosting products                        |
+| `RUNNERS.md`                 | Different runner architectures and products           |
+| `OBSERVABILITY-PLATFORMS.md` | Monitoring and observability options                  |
+
+One important observation: these documents are surveys, not authoritative, permanently updated product databases.
+
+The skill itself tells the agent to research current information rather than blindly trust potentially outdated product details.
+
+## **3. Why does the lesson introduce skills before infrastructure selection?**
+
+This is the interesting part.
+
+Consider two situations.
+
+**Without the skill:**
+
+You ask an agent:
+
+"Help me select infrastructure for my Software Factory."
+
+The agent might misunderstand terminology, miss architectural distinctions or make assumptions.
+
+**With the skill:**
+
+The agent has a shared vocabulary and reference material.
+
+It can reason about:
+
+- Ticket trackers.
+- Git hosts.
+- Runners.
+- Orchestrators.
+- Observability platforms.
+- Their relationships.
+
+The skill establishes a common understanding before the agent starts asking you architectural questions.
+
+## **4. The&#x20;**`/grill-me`**&#x20;session**
+
+This is the next important part I missed.
+
+The lesson asks you to run:
+
+```
+/grill-me about creating a new /software-factory. I want to move off this GitHub Actions-based setup into new infrastructure. Let's not worry about any new tasks yet, let's just think about the services. Ask one question at a time.
+```
+
+The idea is to have the agent interview you.
+
+For example:
+
+1. Which ticket tracker do you currently use?
+2. Which Git host do you prefer?
+3. What type of runner do you need?
+4. How frequently will agents execute?
+5. What is your infrastructure budget?
+6. Do you prefer managed services or self-hosted infrastructure?
+7. What observability information do you need?
+
+These are illustrative questions; the actual agent should ask one at a time based on your answers.
+
+## **5. The complete sequence of this lesson**
+
+1. **Add the software-factory skill**
+
+   Run the cherry-pick command.
+2. **Understand SKILL.md**
+
+   Learn the shared vocabulary.
+3. **Read the reference documents**
+
+   Study ticket trackers, Git hosts, runners and observability platforms.
+4. **Understand runner classifications**
+
+   CI runner, MicroVM API, bundled agent platform and bring-your-own worker.
+5. **Start&#x20;**`/grill-me`
+
+   Let the agent interview you one question at a time.
+6. **Make infrastructure decisions**
+
+   Evaluate pricing, usage, operational complexity and capabilities.
+7. **Finalize all five components**
+
+   Prepare the decisions for the next lesson's architecture diagram.
+
+**One distinction worth remembering:** A skill is not an infrastructure component. It is knowledge and instructions supplied to the agent to help it perform a task consistently.
+
+Going forward, let's follow the actual course sequence rather than jumping straight to product recommendations. We should understand the skill and its reference files first, then work through the `/grill-me` exercise.
