@@ -364,7 +364,7 @@ If these four concepts are clear, the rest of this lesson becomes considerably e
 
 ---
 
-Yes. I missed an important part of the lesson: **the&#x20;**`/software-factory`**&#x20;skill and its supporting reference documents.** I focused too much on the five infrastructure components and didn't explain how skills fit into the decision-making process.
+ an important part of the lesson: **the&#x20;**`/software-factory`**&#x20;skill and its supporting reference documents.** I focused too much on the five infrastructure components and didn't explain how skills fit into the decision-making process.
 
 Let's correct that.
 
