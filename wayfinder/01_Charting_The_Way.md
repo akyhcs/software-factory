@@ -491,3 +491,151 @@ C. Prototype
 D. Grilling
 
 Let's start with these two questions.
+
+
+--------------
+
+
+The concept of **Frontier** comes into the picture because Wayfinder needs to determine **which decision tickets are ready to be worked on right now.**
+
+Remember, Wayfinder represents the project as a dependency graph. Not every decision can be made independently.
+
+Let's understand why.
+
+## 1. Consider a real example
+
+Suppose we're building an AI-powered trading platform.
+
+We have identified four decisions:
+
+- Ticket #1: Select broker API.
+- Ticket #2: Design market data architecture.
+- Ticket #3: Design order execution architecture.
+- Ticket #4: Design automated trading workflow.
+
+Now, imagine the dependencies are:
+
+```text
+       Ticket #1
+       Select Broker
+            |
+            |
+            v
+       Ticket #3
+    Order Execution
+            |
+            |
+            v
+       Ticket #4
+   Automated Trading
+```
+
+Ticket #2 is independent.
+
+```text
+       Ticket #1                 Ticket #2
+       Select Broker             Market Data
+            |
+            v
+       Ticket #3
+    Order Execution
+            |
+            v
+       Ticket #4
+   Automated Trading
+```
+
+Can we work on Ticket #3 before completing Ticket #1?
+
+Not necessarily.
+
+We need to understand the broker's capabilities before finalizing the order execution architecture.
+
+However, we can work on Ticket #2 independently.
+
+## 2. This is where Frontier comes in
+
+Frontier identifies the tickets that are eligible to be worked on.
+
+According to the lesson:
+
+**Frontier = Open + Unblocked + Unclaimed tickets.**
+
+Let's evaluate our example.
+
+| Ticket | Status | Eligible? |
+|---|---|---|
+| #1 | Open, unblocked, unclaimed | Yes |
+| #2 | Open, unblocked, unclaimed | Yes |
+| #3 | Open, blocked by #1 | No |
+| #4 | Open, blocked by #3 | No |
+
+Therefore, our current frontier is:
+
+`[#1, #2]`
+
+We can work on both tickets simultaneously.
+
+## 3. What happens after completing Ticket #1?
+
+Suppose we finish Ticket #1.
+
+The dependency graph now looks like this:
+
+```text
+       Ticket #1 (Completed)
+                 |
+                 v
+       Ticket #3 (Unblocked)
+                 |
+                 v
+       Ticket #4 (Blocked)
+
+       Ticket #2 (Open)
+```
+
+Our new frontier becomes:
+
+`[#2, #3]`
+
+Notice what happened?
+
+Ticket #3 was previously blocked. Completing Ticket #1 made it available.
+
+This is how the frontier evolves.
+
+## 4. Why is this important for AI agents?
+
+Imagine you have five AI agents working on the same project.
+
+Without frontier management:
+- Multiple agents might work on dependent decisions prematurely.
+- Agents might make decisions using incomplete information.
+- Two agents might work on the same ticket.
+- Implementation decisions might conflict.
+
+With frontier management:
+
+1. The system identifies eligible tickets.
+2. Agents claim available tickets.
+3. Agents work on independent decisions in parallel.
+4. Completed tickets unblock dependent tickets.
+5. The frontier is recalculated.
+
+This creates an organized execution process.
+
+## 5. The bigger picture
+
+Think of Frontier as a mechanism for **work scheduling in a dependency graph**.
+
+There are three important concepts:
+
+| Concept | Responsibility |
+|---|---|
+| Dependency graph | Defines which decisions depend on others |
+| Blocking relationship | Prevents premature decisions |
+| Frontier | Identifies what can be worked on now |
+
+**One important distinction:** Frontier doesn't decide what the project needs. The map and tickets represent that. Frontier simply identifies which existing tickets are currently ready for execution.
+
+That's why Frontier is essential to Wayfinder: it converts a dynamically evolving project plan into actionable work for humans and AI agents.
